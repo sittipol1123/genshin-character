@@ -81,6 +81,7 @@
 
 html,
 body {
+  padding-right: 0px !important;
   max-width: 100vw;
   overflow-x: hidden;
 }

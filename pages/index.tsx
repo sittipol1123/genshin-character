@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Character } from '@/models/CharacterModel';
 import { Fade } from '../component/firstpage/FadeModal';
-import Subnavbar from '../component/Subnavbar';
+// import Subnavbar from '../component/Subnavbar';
 
 type Data = Array<string>;
 
@@ -31,6 +31,7 @@ export default function Home() {
   const [detail, setDetail] = useState<Character | null>(null);
   const [name, setName] = useState<string | null>(null);
 
+  
   const handleOpen = async (name: string) => {
     const res = await fetch(`https://api.genshin.dev/characters/${name}`);
     const json = await res.json();
@@ -39,7 +40,7 @@ export default function Home() {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-
+  
   useEffect(() => {
     const fetchdata = async () => {
       const res = await fetch('https://api.genshin.dev/characters');
@@ -47,13 +48,46 @@ export default function Home() {
       setData(json);
     }
     fetchdata();
-
+    
   }, []);
+  
+  // const [vision, setvision] = useState<Data | null>(null);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch("https://api.genshin.dev/elements");
+  //     const json = await res.json();
+  //     setvision(json);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <>
-      <Subnavbar />
-      <Container maxWidth="lg" sx={{ bgcolor: '#0a1929', p: 2, borderRadius: 5 }}>
+      {/* <Container>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            textAlign: "center",
+            justifyContent: "center",
+          }}
+          mt={2}
+        >
+          {vision?.map((value: string, index: number) => {
+            return (
+              <Typography sx={{ minWidth: 100, cursor: 'pointer' }} key={index}>
+                <img
+                  src={`https://api.genshin.dev/elements/${value}/icon`}
+                  srcSet={`https://api.genshin.dev/elements/${value}/icon`}
+                  alt={value}
+                  loading="lazy"
+                />
+              </Typography>
+            );
+          })}
+        </Box>
+      </Container> */}
+      <Container maxWidth="lg" sx={{ bgcolor: '#0a1929', p: 2, borderRadius: 5, marginTop: 2 }}>
         <ImageList cols={4}>
           {data?.map((value: string, index: number) => (
             <ImageListItem key={index} sx={{ bgcolor: '#001e3c', borderRadius: 2, p: 2, cursor: 'pointer' }} onClick={() => handleOpen(value)}>

@@ -39,7 +39,6 @@ export default function Artifacts() {
           {data?.map((value: string, index: number) => {
             return (
               <Grid item xs={3} key={index}>
-                <Item>{value}</Item>
                 <Item>
                   <img
                     src={`https://api.genshin.dev/artifacts/${value}/flower-of-life`}
@@ -47,6 +46,7 @@ export default function Artifacts() {
                     loading="lazy"
                     style={{ height: 60, maxWidth: "100%" }}
                   />
+                  <p>{value}</p>
                 </Item>
               </Grid>
             );

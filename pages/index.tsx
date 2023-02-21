@@ -1,26 +1,26 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import Container from '@mui/material/Container';
-import { ChildComponent } from '../component/firstpage/ImageComponent';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Character } from '@/models/CharacterModel';
-import { Fade } from '../component/firstpage/FadeModal';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import Container from "@mui/material/Container";
+import { ChildComponent } from "../component/firstpage/ImageComponent";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { Character } from "@/models/CharacterModel";
+import { Fade } from "../component/firstpage/FadeModal";
 // import Subnavbar from '../component/Subnavbar';
 
 type Data = Array<string>;
 
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '50%',
-  bgcolor: '#121212',
-  border: '2px solid #000',
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "50%",
+  bgcolor: "#121212",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -31,7 +31,6 @@ export default function Home() {
   const [detail, setDetail] = useState<Character | null>(null);
   const [name, setName] = useState<string | null>(null);
 
-  
   const handleOpen = async (name: string) => {
     const res = await fetch(`https://api.genshin.dev/characters/${name}`);
     const json = await res.json();
@@ -40,17 +39,16 @@ export default function Home() {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  
+
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await fetch('https://api.genshin.dev/characters');
+      const res = await fetch("https://api.genshin.dev/characters");
       const json = await res.json();
       setData(json);
-    }
+    };
     fetchdata();
-    
   }, []);
-  
+
   // const [vision, setvision] = useState<Data | null>(null);
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -87,10 +85,22 @@ export default function Home() {
           })}
         </Box>
       </Container> */}
-      <Container maxWidth="lg" sx={{ bgcolor: '#0a1929', p: 2, borderRadius: 5, marginTop: 2 }}>
+      <Container
+        maxWidth="lg"
+        sx={{ bgcolor: "#0a1929", p: 2, borderRadius: 5, marginTop: 2 }}
+      >
         <ImageList cols={4}>
           {data?.map((value: string, index: number) => (
-            <ImageListItem key={index} sx={{ bgcolor: '#001e3c', borderRadius: 2, p: 2, cursor: 'pointer' }} onClick={() => handleOpen(value)}>
+            <ImageListItem
+              key={index}
+              sx={{
+                bgcolor: "#001e3c",
+                borderRadius: 2,
+                p: 2,
+                cursor: "pointer",
+              }}
+              onClick={() => handleOpen(value)}
+            >
               <img
                 src={`https://api.genshin.dev/characters/${value}/icon-big`}
                 srcSet={`https://api.genshin.dev/characters/${value}/icon-big`}
@@ -111,7 +121,7 @@ export default function Home() {
           <Fade in={open}>
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                {detail ? detail.name : ''}
+                {detail ? detail.name : ""}
               </Typography>
               <img
                 src={`https://api.genshin.dev/characters/${name}/card`}
@@ -120,12 +130,12 @@ export default function Home() {
                 style={{ maxHeight: 500 }}
               />
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {detail ? detail.title : ''}
+                {detail ? detail.title : ""}
               </Typography>
             </Box>
           </Fade>
         </Modal>
       </Container>
     </>
-  )
+  );
 }

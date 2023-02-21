@@ -85,57 +85,57 @@ export default function Home() {
           })}
         </Box>
       </Container> */}
-      <Container
-        maxWidth="lg"
-        sx={{ bgcolor: "#0a1929", p: 2, borderRadius: 5, marginTop: 2 }}
-      >
-        <ImageList cols={4}>
-          {data?.map((value: string, index: number) => (
-            <ImageListItem
-              key={index}
-              sx={{
-                bgcolor: "#001e3c",
-                borderRadius: 2,
-                p: 2,
-                cursor: "pointer",
-              }}
-              onClick={() => handleOpen(value)}
-            >
-              <img
-                src={`https://api.genshin.dev/characters/${value}/icon-big`}
-                srcSet={`https://api.genshin.dev/characters/${value}/icon-big`}
-                alt={value}
-                loading="lazy"
-              />
-              <ChildComponent title={value}></ChildComponent>
-            </ImageListItem>
-          ))}
-          <ImageListItem></ImageListItem>
-        </ImageList>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+        <Container
+          maxWidth="lg"
+          sx={{ bgcolor: "#0a1929", p: 2, borderRadius: 5, marginTop: 12 }}
         >
-          <Fade in={open}>
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                {detail ? detail.name : ""}
-              </Typography>
-              <img
-                src={`https://api.genshin.dev/characters/${name}/card`}
-                srcSet={`https://api.genshin.dev/characters/${name}/card`}
-                loading="lazy"
-                style={{ maxHeight: 500 }}
-              />
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {detail ? detail.title : ""}
-              </Typography>
-            </Box>
-          </Fade>
-        </Modal>
-      </Container>
+          <ImageList cols={4}>
+            {data?.map((value: string, index: number) => (
+              <ImageListItem
+                key={index}
+                sx={{
+                  bgcolor: "#001e3c",
+                  borderRadius: 2,
+                  p: 2,
+                  cursor: "pointer",
+                }}
+                onClick={() => handleOpen(value)}
+              >
+                <img
+                  src={`https://api.genshin.dev/characters/${value}/icon-big`}
+                  srcSet={`https://api.genshin.dev/characters/${value}/icon-big`}
+                  alt={value}
+                  loading="lazy"
+                />
+                <ChildComponent title={value}></ChildComponent>
+              </ImageListItem>
+            ))}
+            <ImageListItem></ImageListItem>
+          </ImageList>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Fade in={open}>
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  {detail ? detail.name : ""}
+                </Typography>
+                <img
+                  src={`https://api.genshin.dev/characters/${name}/card`}
+                  srcSet={`https://api.genshin.dev/characters/${name}/card`}
+                  loading="lazy"
+                  style={{ maxHeight: 500 }}
+                />
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  {detail ? detail.title : ""}
+                </Typography>
+              </Box>
+            </Fade>
+          </Modal>
+        </Container>
     </>
   );
 }

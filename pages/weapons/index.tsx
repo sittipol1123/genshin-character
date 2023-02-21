@@ -16,19 +16,18 @@ const Item = styled(Paper)(({ theme }) => ({
   color: "#fff",
 }));
 
-export default function Artifacts() {
+export default function Weapon() {
   const [data, setData] = useState<Data | null>(null);
 
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await fetch("https://api.genshin.dev/artifacts");
+      const res = await fetch("https://api.genshin.dev/weapons");
       const json = await res.json();
       setData(json);
-      // console.log(json);
+      console.log(json);
     };
     fetchdata();
   }, []);
-
   return (
     <Container
       maxWidth="lg"
@@ -41,8 +40,8 @@ export default function Artifacts() {
               <Grid item xs={3} key={index}>
                 <Item>
                   <img
-                    src={`https://api.genshin.dev/artifacts/${value}/flower-of-life`}
-                    srcSet={`https://api.genshin.dev/artifacts/${value}/flower-of-life`}
+                    src={`https://api.genshin.dev/weapons/${value}/icon`}
+                    srcSet={`https://api.genshin.dev/weapons/${value}/icon`}
                     loading="lazy"
                     style={{ height: 60, maxWidth: "100%" }}
                   />

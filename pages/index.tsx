@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Character } from '@/models/CharacterModel';
 import { Fade } from '../component/firstpage/FadeModal';
+import Subnavbar from '../component/Subnavbar';
 
 type Data = Array<string>;
 
@@ -51,6 +52,7 @@ export default function Home() {
 
   return (
     <>
+      <Subnavbar />
       <Container maxWidth="lg" sx={{ bgcolor: '#0a1929', p: 2, borderRadius: 5 }}>
         <ImageList cols={4}>
           {data?.map((value: string, index: number) => (
@@ -61,9 +63,7 @@ export default function Home() {
                 alt={value}
                 loading="lazy"
               />
-              <ChildComponent title={value}>
-                {/* <Button onClick={() => handleOpen(value)}>detail</Button> */}
-              </ChildComponent>
+              <ChildComponent title={value}></ChildComponent>
             </ImageListItem>
           ))}
           <ImageListItem></ImageListItem>

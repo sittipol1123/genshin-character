@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
 import Navbar from '../component/Nav';
-import Subnavbar from '../component/Subnavbar';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -29,7 +28,6 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
         <Navbar/>
-        <Subnavbar/>
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>

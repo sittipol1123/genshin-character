@@ -8,17 +8,61 @@ import Link from 'next/link'
 
 type Data = Array<string>;
 
+interface Upgrade {
+  name: string;
+  value: string;
+}
+
+interface SkillTalent {
+  name: string;
+  unlock: string;
+  description: string;
+  upgrades: Upgrade[];
+  type: string;
+}
+
+interface PassiveTalent {
+  name: string;
+  unlock: string;
+  description: string;
+  level: number;
+}
+
+interface Constellation {
+  name: string;
+  unlock: string;
+  description: string;
+  level: number;
+}
+
+interface Character {
+  name: string;
+  title: string;
+  vision: string;
+  weapon: string;
+  nation: string;
+  affiliation: string;
+  rarity: number;
+  constellation: string;
+  birthday: string;
+  description: string;
+  skillTalents: SkillTalent[];
+  passiveTalents: PassiveTalent[];
+  constellations: Constellation[];
+  vision_key: string;
+  weapon_type: string;
+}
+
 export default function Home() {
   const [data, setData] = useState<Data | null>(null);
-
   useEffect(() => {
     const fetchdata = async () => {
       const res = await fetch('https://api.genshin.dev/characters')
       const json = await res.json();
       setData(json);
     }
-
     fetchdata();
+
   }, []);
 
   return (
@@ -34,12 +78,13 @@ export default function Home() {
                   alt={value}
                   loading="lazy"
                 />
-
-                <ImageListItemBar
+                {/* {fetchCharacter(`${value}`)} */}
+                {/* <ImageListItemBar
                   title={value}
                   subtitle={<span>full name: {value}</span>}
                   position="below"
-                />
+                /> */}
+                <ChildComponent title={value}></ChildComponent>
               </Link>
             </ImageListItem>
           ))}
@@ -48,4 +93,34 @@ export default function Home() {
       </Container>
     </>
   )
+}
+
+type Props = {
+  title: string
+}
+
+function ChildComponent({title}: Props) {
+  const [detail, setDetail] = useState<Character | null>(null);
+
+  useEffect(() => {
+    const fetchCharacter = async () => {
+      const res = await fetch(`https://api.genshin.dev/characters/${title}`);
+      const json = await res.json();
+      setDetail(json);
+      // console.log(json);
+    }
+
+    fetchCharacter();
+  }, []);
+
+  return (
+    <div>
+      <ImageListItemBar
+        title={detail?.name}
+        subtitle={<span>vision: {detail?.vision}</span>}
+        position="below"
+        sx={{ bgcolor: '#0a1929', p: 1, marginTop: 1 }}
+      />
+    </div>
+  );
 }

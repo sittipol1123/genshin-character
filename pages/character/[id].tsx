@@ -2,12 +2,12 @@ import React from 'react'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
-export interface Upgrade {
+interface Upgrade {
     name: string;
     value: string;
 }
 
-export interface SkillTalent {
+interface SkillTalent {
     name: string;
     unlock: string;
     description: string;
@@ -15,21 +15,21 @@ export interface SkillTalent {
     type: string;
 }
 
-export interface PassiveTalent {
+interface PassiveTalent {
     name: string;
     unlock: string;
     description: string;
     level: number;
 }
 
-export interface Constellation {
+interface Constellation {
     name: string;
     unlock: string;
     description: string;
     level: number;
 }
 
-export interface Data {
+interface Data {
     name: string;
     title: string;
     vision: string;
